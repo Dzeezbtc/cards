@@ -15,6 +15,7 @@ The colour code matches the original flat chips (`../*.svg`), so players don't h
 | Path | What | Used by |
 |---|---|---|
 | `{file}.webp` | Table sprite: 128 × 128, transparent, slight tilt so stacks read as piles (~8 KB each) | `block52/ui` `src/constants/chips.ts` |
+| `dealer.webp` | The dealer button, same theme (white marble, gold veins, gold "D") | `block52/ui` `getDealerImageUrl()` |
 | `showcase/{file}.webp` | 1400 × 980 three-quarter hero shot | large views and marketing |
 | `source/` | The Blender scripts that produced everything here | re-rendering, new skins |
 
@@ -55,3 +56,11 @@ Blender -b --factory-startup --python source/export_webp.py -- renders/set/table
 ```
 
 `render_set.sh` holds the whole set as one table: stone, dye colour, vein colours, inlays and trim per chip. A new skin is a new table.
+
+The dealer button is rendered with the same model, inlays off:
+
+```
+Blender -b --factory-startup --python source/hero.py -- --topdown --tilt 72 --thick 1.8 \
+  --inlays 0 --value D --body Marble016 --tint "#f6f2ea" --vein "#c8a35a" \
+  --samples 96 --res 512 --out dealer.png
+```

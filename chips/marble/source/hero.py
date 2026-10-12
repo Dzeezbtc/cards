@@ -38,6 +38,7 @@ ap.add_argument("--insert-solid", default=None, help="hex: plain polished inlays
 ap.add_argument("--insert-tint", default=None, help="hex colour multiplied over the inlay scan")
 ap.add_argument("--tilt", type=float, default=90.0, help="topdown camera elevation in degrees (90 = straight down)")
 ap.add_argument("--thick", type=float, default=1.0, help="chip thickness multiplier (table sprites show the edge for stacking)")
+ap.add_argument("--inlays", type=int, default=8, help="number of edge inlays (0 = dealer button: plain stone ring with gold pinstripes)")
 ap.add_argument("--topdown", action="store_true", help="square, straight-down, transparent: the table's chip sprite")
 args = ap.parse_args(argv)
 
@@ -301,7 +302,7 @@ bev.limit_method = "ANGLE"
 apply_all(body)
 
 # recessed pockets for the 8 inlays and the centre plate
-N, SPAN = 8, 0.34
+N, SPAN = args.inlays, 0.34
 POCKET_IN, POCKET_OUT, POCKET_D = 0.70, 0.90, 0.016
 for i in range(N):
     a = i * 2 * math.pi / N
@@ -320,6 +321,15 @@ for i in range(N):
     ins = sector_prism(f"inlay{i}", POCKET_IN + m, POCKET_OUT - m, a - SPAN / 2 + m * 1.25, a + SPAN / 2 - m * 1.25, TOP - POCKET_D, TOP - 0.0025)
     assign(ins, insert_mat)
     smooth(ins, 30)
+
+if N == 0:
+    # Dealer button: no inlays, so two fine inlaid gold pinstripes dress the stone ring instead.
+    for i, r in enumerate((0.82,)):
+        bpy.ops.mesh.primitive_torus_add(major_radius=r, minor_radius=0.010, major_segments=256, minor_segments=16, location=(0, 0, TOP - 0.003))
+        pin = bpy.context.active_object
+        pin.name = f"pinstripe{i}"
+        smooth(pin, 60)
+        assign(pin, metal_polished)
 
 # ---------------------------------------------------------------- coin-milled gold band around the edge
 band = cylinder("band", R * 1.0, -T * 0.22, T * 0.22)
