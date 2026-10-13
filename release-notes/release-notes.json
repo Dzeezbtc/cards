@@ -1,5 +1,45 @@
 [
   {
+    "id": "weekly-2026-W42",
+    "date": "2026-10-14",
+    "title": "Pot-Limit Omaha foundations, chip-safety engine fixes, and a unified History/Settings panel",
+    "tags": [
+      "poker-vm@sdk-v1.7.0",
+      "pokerchain@v0.1.178",
+      "weekly"
+    ],
+    "highlights": [
+      "PLO end-to-end groundwork: 4-card dealing, 2-of-4 + 3-of-5 evaluator, pot-limit betting cap, SDK helpers",
+      "Three engine fixes that stop chips being destroyed or SNGs stalling between hands",
+      "History and Settings fly-outs replaced by one floating tabbed panel across desktop and mobile"
+    ],
+    "features": [
+      "Omaha best-hand evaluator (2-of-4 + 3-of-5) with BestHandForVariant dispatch in the Go engine",
+      "Variant-aware hole-card dealing and showdown (2 vs 4 cards) in the engine",
+      "Pot-limit betting cap with a betting-structure foundation, limit orthogonal to variant",
+      "SDK: createGame bettingLimit, PLO helpers, Omaha best hand and all-in equity for 4-card hands",
+      "Floating tabbed History/Settings panel, collapsible on desktop and toggled from the mobile hamburger",
+      "Indexer records who played each hand, exposed via GET /players/:address/hands",
+      "Accounts table gains a date/time field for sorting by most recent"
+    ],
+    "bugFixes": [
+      "Recover collapsed SB/BB positions in serialized end-of-hand state after a short all-in heads-up bust-out",
+      "Skip busted seats in the END-round nextToAct fallback, unsticking SNGs between hands",
+      "Backport two chip-destroying fixes: mid-hand new-hand wiping the pot, all-in blinds losing it",
+      "Bridge partially_paid NOWPayments deposits exactly once",
+      "Other players' NFT avatars resolve without depending on a single IPFS gateway",
+      "Pot presets below the minimum bet grey out instead of resizing",
+      "bridge-admin Retry no longer reports \"timeout\" for a payment that went through"
+    ],
+    "improvements": [
+      "Indexer privacy: store and serve only cards shown at the table, never full decks",
+      "Node bumped from 22.13.0 to 24.13.0 after clearing the Cosmos-SDK blocker",
+      "Design docs published for Pot-Limit Omaha and Play-for-NFT (ETH escrow, validator-signed release)",
+      "README links the test Telegram group"
+    ],
+    "tests": []
+  },
+  {
     "id": "weekly-2026-W41",
     "date": "2026-10-07",
     "title": "Self-service node & validator onboarding, bridge admin auth, blind-posting fix",
