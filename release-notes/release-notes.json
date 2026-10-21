@@ -1,5 +1,48 @@
 [
   {
+    "id": "weekly-2026-W43",
+    "date": "2026-10-21",
+    "title": "Blind structures, sealed commit-reveal dealing, and in-table replay",
+    "tags": [
+      "poker-vm@sdk-v1.12.0",
+      "pokerchain@v0.1.189",
+      "weekly"
+    ],
+    "highlights": [
+      "SDK blind-structure stack: DTOs, text parse/format, createGame sngConfig and blind presets (v1.10.0→v1.12.0)",
+      "Sealed hands phase 1: commit-reveal dealing in the engine plus SealedDTO and reveal-board/reveal-deal actions",
+      "In-table replay with media transport through the session's hands, showing the hole cards the viewer knows"
+    ],
+    "features": [
+      "SDK: BlindStructureDTO, AnteRuleDTO, BlindLevelDTO and GameOptionsDTO.blindStructure",
+      "SDK: parseBlindStructure / formatBlindStructure text form over BlindStructureDTO",
+      "SDK: createGame sngConfig.blindStructure, expandBlindLevel and resolveBlindPreset",
+      "SDK: SealedDTO, TexasHoldemStateDTO.sealed and the reveal-board / reveal-deal actions",
+      "Engine: sealed hands — hole cards as references, board from reveals, settlement at reveal-deal",
+      "Table: in-table replay button with media transport through the session's hands",
+      "Replay: show the hole cards the viewer knows on every step (showdown reveals + own cards)",
+      "Table: call the clock on a stalled opponent via MsgTimeout from an observing client",
+      "Create forms: Cash Game / Sit & Go / Tournament game types (a Tournament is a scheduled sit-and-go)",
+      "Lobby: name the game with its betting limit — \"Pot-Limit Omaha\", not \"Omaha\"",
+      "UI: photoreal marble chip set"
+    ],
+    "bugFixes": [
+      "Engine: freeze blind positions from the posts, not the live active rotation (all-in BB shifted seats)",
+      "Engine: order winners[] by the stamped seat, not a live seatOf() lookup — fixes consensus break",
+      "SNG: enable \"Start now\" on start time and minimum players, not on the engine offering start",
+      "Recent Transactions: show only what the wallet received, not others' joins as your own debit"
+    ],
+    "improvements": [
+      "perf: type-only SDK import in GameStateContext plus cosmjs first-paint analysis",
+      "Engine cleanup: retire port-phase markers, rewrite contract.go, archive the managers audit",
+      "Docs: search all three repos and grep the code before filing an issue",
+      "Docs: screenshots belong in the PR description, never committed"
+    ],
+    "tests": [
+      "CI: staticcheck + deadcode gates on the go-engine workflow, with existing findings cleared"
+    ]
+  },
+  {
     "id": "weekly-2026-W42",
     "date": "2026-10-14",
     "title": "Pot-Limit Omaha foundations, chip-safety engine fixes, and a unified History/Settings panel",
